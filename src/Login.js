@@ -1,6 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./login.css";
+
+const loginAPI = async (email, password) => {
+  const res = await axios.post("http://localhost:5000/api/auth/login", {
+    email,
+    password,
+  });
+  return res.data;
+};
 
 const Login = () => {
   return (
@@ -20,6 +29,7 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 rounded"
+            onClick={loginAPI}
           >
             Continue
           </button>

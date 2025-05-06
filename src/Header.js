@@ -1,7 +1,15 @@
 import React from "react";
 import "./Header.css";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaMapMarkerAlt } from "react-icons/fa";
+
+const searchProducts = async (query) => {
+  const res = await axios.get(
+    `http://localhost:5000/api/search?query=${query}`
+  );
+  return res.data;
+};
 
 const Header = () => {
   return (
@@ -23,7 +31,9 @@ const Header = () => {
           className="header__searchInput"
           placeholder="Search products..."
         />
-        <button className="header__searchButton">Search</button>
+        <button className="header__searchButton" onClick={searchProducts}>
+          Search
+        </button>
       </div>
       <div className="flex items-center space-x-6">
         {/* Wrap your signin block in a Link */}
